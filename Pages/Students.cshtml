@@ -1,0 +1,30 @@
+@page "{handler?}/{id?}"
+@model StudentsModel
+
+<form method="post">
+    <label>First Name:</label>
+    <input asp-for="Student.FirstMidName" />
+    <br />
+    <span asp-validation-for="Student.FirstMidName"></span>
+    <br />
+    <label>Last Name:</label>
+    <input asp-for="Student.LastName" />
+    <br />
+    <span asp-validation-for="Student.LastName"></span>
+    <br />
+    <label>Date:</label>
+    <input type="date" asp-for="Student.EnrollmentDate">
+    <br />
+    <br />
+    <button asp-page-handler="add" type="submit">Add</button>
+    <button asp-page-handler="edit" type="submit" asp-route-id="@Model.Student.ID">Edit</button>
+    <button asp-page-handler="delete" type="submit" asp-route-id="@Model.Student.ID">Delete</button>
+</form>
+
+@foreach (var student in @Model.Students)
+{
+    <form method="get">
+    <a type="submit" asp-page-handler="view" asp-route-id="@student.ID">@student.FirstMidName @student.LastName
+        @student.EnrollmentDate</a>
+</form>
+}
